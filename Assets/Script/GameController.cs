@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour
                 startPos = card.transform.position;
                 startShift = hit.point - startPos;
                 startShift.z = 0;
+                card.OnDrag();
                 return card;
             }
         }
@@ -66,9 +67,6 @@ public class GameController : MonoBehaviour
         //clickPos.z = mainCamera.nearClipPlane;
         clickPos.z = card.transform.position.z -  mainCamera.transform.position.z;
         var pos = mainCamera.ScreenToWorldPoint(clickPos, Camera.MonoOrStereoscopicEye.Mono);
-
-        Debug.Log($"pos {pos} / {clickPos}");
-
         pos.z = startPos.z;
 
         card.transform.position = pos - startShift;
@@ -90,8 +88,6 @@ public class GameController : MonoBehaviour
             bestSlot = slot;
         }
 
-        pos = bestSlot.transform.position;
-        pos.z -= 0.01f;
-        card.transform.position = pos;
+        bestSlot.AddCard(card);
     }
 }
