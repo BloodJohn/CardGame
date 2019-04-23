@@ -1564,7 +1564,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3403377071065204916, guid: 6625e18c3b275ad40bef4d9323d8a0f3, type: 3}
-  shift: {x: 0.1, y: -0.1, z: -0.1}
+  materialList:
+  - {fileID: 2100000, guid: 235ac4a6227d30a4d94cf932f64a6fca, type: 2}
+  - {fileID: 2100000, guid: 6f7535d2a18988f4c85c3a0541be78b6, type: 2}
 --- !u!4 &1557917175
 Transform:
   m_ObjectHideFlags: 0

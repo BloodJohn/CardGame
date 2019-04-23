@@ -22,6 +22,8 @@ public class CardView : MonoBehaviour
         descriptionText.text = model.description;
         damageText.text = model.damage.ToString();
         healthText.text = model.health.ToString();
+
+        imageQuad.material = model.image;
     }
 
 
@@ -49,5 +51,5 @@ public class CardModel
     public int damage;
     public int health;
     public string description;
-    public Texture image;
+    public Material image; 
 }
