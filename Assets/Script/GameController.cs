@@ -18,15 +18,12 @@ public class GameController : MonoBehaviour
     private Vector3 startPos;
     private Vector3 startShift;
 
-    private List<SlotView> slotList = new List<SlotView>();
     private List<CardView> cardList = new List<CardView>();
 
     private void Awake()
     {
         mainCamera = Camera.main;
-
-        slotList.AddRange(FindObjectsOfType<SlotView>());
-
+        
         backBtn.onClick.AddListener(Discard);
         dealBtn.onClick.AddListener(DealCard);
     }
@@ -60,17 +57,14 @@ public class GameController : MonoBehaviour
         {
             foreach (var slot in PlayerHand.GetComponentsInChildren<SlotView>())
             {
-                if (slot.IsEmpty)
-                {
-                    slot.AddCard(card);
-                    cardList.Add(card);
-                    return;
-                }
+                if (!slot.IsEmpty) continue;
+                slot.AddCard(card);
+                cardList.Add(card);
+                return;
             }
         }
 
         PlayerDeck.Discard(card);
-        //dealBtn.enabled = false;
     }
 
     private void Discard()
@@ -108,7 +102,6 @@ public class GameController : MonoBehaviour
         if (card == null) return;
 
         var clickPos = Input.mousePosition;
-        //clickPos.z = mainCamera.nearClipPlane;
         clickPos.z = card.transform.position.z - mainCamera.transform.position.z;
         var pos = mainCamera.ScreenToWorldPoint(clickPos, Camera.MonoOrStereoscopicEye.Mono);
         pos.z = startPos.z;
@@ -124,7 +117,7 @@ public class GameController : MonoBehaviour
         SlotView bestSlot = null;
         var minDist2 = float.MaxValue;
 
-        foreach (var slot in slotList)
+        foreach (var slot in FindObjectsOfType<SlotView>())
         {
             if (!slot.IsEmpty) continue;
             if (card.IsPlayerTable && !slot.IsPlayerTable) continue;
