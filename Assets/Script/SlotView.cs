@@ -10,12 +10,14 @@ public class SlotView : MonoBehaviour
 
     public void AddCard(CardView card)
     {
-        var pos = transform.position;
-        pos.z -= 0.01f;
-        card.transform.position = pos;
+        card.transform.parent = transform;
+        card.transform.localRotation = Quaternion.identity;
+        card.transform.localPosition = Vector3.zero + Vector3.back * 0.01f;
 
         card.OnSlot(this);
         cardList.Add(card);
+
+        
     }
 
     public CardView ReleaseCard()

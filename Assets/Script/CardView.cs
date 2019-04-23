@@ -7,6 +7,8 @@ public class CardView : MonoBehaviour
 
     private SlotView currecntSlot;
 
+    public bool IsDraggable => currecntSlot != null;
+
     public void OnSlot(SlotView slot)
     {
         currecntSlot = slot;

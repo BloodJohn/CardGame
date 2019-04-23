@@ -1,8 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public DeckView PlayerDeck;
+    public GameObject PlayerHand;
+    public GameObject PlayerTable;
+
+    public Button backBtn;
+    public Button dealBtn;
+    public Button turnBtn;
+
     private Camera mainCamera;
 
     private CardView currentCard;
@@ -16,6 +25,8 @@ public class GameController : MonoBehaviour
         mainCamera = Camera.main;
 
         slotList.AddRange(FindObjectsOfType<SlotView>());
+
+        dealBtn.onClick.AddListener(DealCard);
     }
 
 
@@ -25,7 +36,7 @@ public class GameController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            currentCard = GetCard();
+            currentCard = PickCard();
         }
         else if (Input.GetMouseButton(0))
         {
@@ -39,21 +50,40 @@ public class GameController : MonoBehaviour
 
     }
 
-    private CardView GetCard()
+    public void DealCard()
+    {
+        var card = PlayerDeck.DealCard();
+
+        if (card != null)
+        {
+            foreach (var slot in PlayerHand.GetComponentsInChildren<SlotView>())
+            {
+                if (slot.IsEmpty)
+                {
+                    slot.AddCard(card);
+                    return;
+                }
+            }
+        }
+
+        dealBtn.enabled = false;
+    }
+
+
+    private CardView PickCard()
     {
         var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         foreach (var hit in Physics.RaycastAll(ray))
         {
             var card = hit.transform.gameObject.GetComponent<CardView>();
+            if (card == null) continue;
+            if (!card.IsDraggable) continue;
 
-            if (card != null)
-            {
-                startPos = card.transform.position;
-                startShift = hit.point - startPos;
-                startShift.z = 0;
-                card.OnDrag();
-                return card;
-            }
+            startPos = card.transform.position;
+            startShift = hit.point - startPos;
+            startShift.z = 0;
+            card.OnDrag();
+            return card;
         }
 
         return null;
@@ -82,6 +112,8 @@ public class GameController : MonoBehaviour
 
         foreach (var slot in slotList)
         {
+            if (!slot.IsEmpty) continue;
+
             var dist2 = (slot.transform.position - pos).sqrMagnitude;
             if (dist2>=minDist2) continue;
             minDist2 = dist2;
