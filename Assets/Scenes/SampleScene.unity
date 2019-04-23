@@ -383,6 +383,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6555280189133413730, guid: 7da99e0eb309cd047a736a9216816623,
+        type: 3}
+      propertyPath: IsPlayerTable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7da99e0eb309cd047a736a9216816623, type: 3}
 --- !u!4 &340670413 stripped
@@ -885,6 +890,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6555280189133413730, guid: 7da99e0eb309cd047a736a9216816623,
+        type: 3}
+      propertyPath: IsPlayerTable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7da99e0eb309cd047a736a9216816623, type: 3}
 --- !u!4 &979677607 stripped
@@ -1160,6 +1170,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6555280189133413730, guid: 7da99e0eb309cd047a736a9216816623,
+        type: 3}
+      propertyPath: IsPlayerTable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7da99e0eb309cd047a736a9216816623, type: 3}
 --- !u!4 &1139799940 stripped
@@ -1234,6 +1249,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555280189133413730, guid: 7da99e0eb309cd047a736a9216816623,
+        type: 3}
+      propertyPath: IsPlayerTable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7da99e0eb309cd047a736a9216816623, type: 3}
@@ -1344,6 +1364,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555280189133413730, guid: 7da99e0eb309cd047a736a9216816623,
+        type: 3}
+      propertyPath: IsPlayerTable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7da99e0eb309cd047a736a9216816623, type: 3}

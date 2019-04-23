@@ -77,7 +77,6 @@ public class GameController : MonoBehaviour
     {
         foreach (var card in cardList)
         {
-            card.OnDrag();
             PlayerDeck.Discard(card);
         }
 
@@ -97,7 +96,7 @@ public class GameController : MonoBehaviour
             startPos = card.transform.position;
             startShift = hit.point - startPos;
             startShift.z = 0;
-            card.OnDrag();
+            card.OnDrag(false);
             return card;
         }
 
@@ -106,11 +105,11 @@ public class GameController : MonoBehaviour
 
     private void MoveCard(CardView card)
     {
-        if (card==null) return;
+        if (card == null) return;
 
         var clickPos = Input.mousePosition;
         //clickPos.z = mainCamera.nearClipPlane;
-        clickPos.z = card.transform.position.z -  mainCamera.transform.position.z;
+        clickPos.z = card.transform.position.z - mainCamera.transform.position.z;
         var pos = mainCamera.ScreenToWorldPoint(clickPos, Camera.MonoOrStereoscopicEye.Mono);
         pos.z = startPos.z;
 
@@ -122,19 +121,20 @@ public class GameController : MonoBehaviour
         if (card == null) return;
         var pos = card.transform.position;
 
-        var bestSlot = slotList[0];
-        var minDist2 = (bestSlot.transform.position - pos).sqrMagnitude;
+        SlotView bestSlot = null;
+        var minDist2 = float.MaxValue;
 
         foreach (var slot in slotList)
         {
             if (!slot.IsEmpty) continue;
+            if (card.IsPlayerTable && !slot.IsPlayerTable) continue;
 
             var dist2 = (slot.transform.position - pos).sqrMagnitude;
-            if (dist2>=minDist2) continue;
+            if (dist2 >= minDist2) continue;
             minDist2 = dist2;
             bestSlot = slot;
         }
 
-        bestSlot.AddCard(card);
+        if (bestSlot != null) bestSlot.AddCard(card);
     }
 }

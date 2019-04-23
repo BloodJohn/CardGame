@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class SlotView : MonoBehaviour
 {
+    public bool IsPlayerTable;
+
     private List<CardView> cardList = new List<CardView>();
 
     public bool IsEmpty => cardList.Count <= 0;
-
+    
     public void AddCard(CardView card)
     {
         card.transform.parent = transform;
@@ -16,8 +18,6 @@ public class SlotView : MonoBehaviour
 
         card.OnSlot(this);
         cardList.Add(card);
-
-        
     }
 
     public CardView ReleaseCard()

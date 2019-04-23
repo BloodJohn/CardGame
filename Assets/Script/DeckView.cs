@@ -35,6 +35,9 @@ public class DeckView : MonoBehaviour
     public void Discard(CardView card)
     {
         if (card==null) return;
+
+        card.OnDrag(true);
+
         card.transform.parent = transform;
         card.transform.localRotation = Quaternion.identity;
         card.transform.localPosition = shift * cardList.Count;
