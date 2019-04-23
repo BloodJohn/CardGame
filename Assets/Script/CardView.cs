@@ -16,6 +16,7 @@ public class CardView : MonoBehaviour
 
     public void OnDrag()
     {
+        currecntSlot.ReleaseCard();
         currecntSlot = null;
     }
 }

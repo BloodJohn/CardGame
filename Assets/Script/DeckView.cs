@@ -18,9 +18,7 @@ public class DeckView : MonoBehaviour
         for (var i = 0; i < 3; i++)
         {
             var card = Instantiate(prefab, transform);
-            cardList.Add(card);
-
-            card.transform.localPosition = shift * i;
+            Discard(card);
         }
     }
 
@@ -32,5 +30,15 @@ public class DeckView : MonoBehaviour
         cardList.Remove(result);
 
         return result;
+    }
+
+    public void Discard(CardView card)
+    {
+        if (card==null) return;
+        card.transform.parent = transform;
+        card.transform.localRotation = Quaternion.identity;
+        card.transform.localPosition = shift * cardList.Count;
+
+        cardList.Add(card);
     }
 }

@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
     private Vector3 startShift;
 
     private List<SlotView> slotList = new List<SlotView>();
+    private List<CardView> cardList = new List<CardView>();
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour
 
         slotList.AddRange(FindObjectsOfType<SlotView>());
 
+        backBtn.onClick.AddListener(Discard);
         dealBtn.onClick.AddListener(DealCard);
     }
 
@@ -50,7 +52,7 @@ public class GameController : MonoBehaviour
 
     }
 
-    public void DealCard()
+    private void DealCard()
     {
         var card = PlayerDeck.DealCard();
 
@@ -61,12 +63,25 @@ public class GameController : MonoBehaviour
                 if (slot.IsEmpty)
                 {
                     slot.AddCard(card);
+                    cardList.Add(card);
                     return;
                 }
             }
         }
 
-        dealBtn.enabled = false;
+        PlayerDeck.Discard(card);
+        //dealBtn.enabled = false;
+    }
+
+    private void Discard()
+    {
+        foreach (var card in cardList)
+        {
+            card.OnDrag();
+            PlayerDeck.Discard(card);
+        }
+
+        cardList.Clear();
     }
 
 
