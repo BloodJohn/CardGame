@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class CardItem : MonoBehaviour
+public class CardView : MonoBehaviour
 {
     public TextMeshPro descriptionText;
 }
